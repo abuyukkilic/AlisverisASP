@@ -1,0 +1,35 @@
+﻿@using Abuyukkilic.Mvc.WebUI.Entity
+@model IEnumerable<Category>
+@{
+    var selectedCategory = Url.RequestContext.RouteData.Values["id"];
+    string classNameLi = "list-group-item list-group-item-action";
+
+}
+
+<div class="list-group">
+    <a href="/Home/List/" class="@classNameLi">
+        <i class="fas fa fa-angle-double-right"></i>
+        Tüm Kategoriler
+    </a>
+
+    @foreach (var item in Model)
+    {
+        classNameLi = "list-group-item list-group-item-action";
+
+        if (selectedCategory != null)
+        {
+            if (item.Id == int.Parse(selectedCategory.ToString()))
+            {
+                //seçilen kategori ile route id birbirine eşit
+                classNameLi += " active";
+            }
+        }
+
+        <a href="/Home/List/@item.Id" class="@classNameLi">
+            <i class="fas fa fa-angle-double-right"></i>
+            @item.Name
+        </a>
+
+
+    }
+</div>
