@@ -35,6 +35,15 @@
     font-size: 16px;
 }
 
+.card-description {
+    height: 50px;
+}
+
+#product-details h1 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
