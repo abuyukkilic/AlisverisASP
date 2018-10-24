@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Abuyukkilic.Mvc.WebUI.Models;
 
 namespace Abuyukkilic.Mvc.WebUI.Controllers
 {
@@ -13,8 +14,18 @@ namespace Abuyukkilic.Mvc.WebUI.Controllers
         // GET: Home
         public ActionResult Index()
         {
-
-            return View(_context.Products.Where(i=>i.IsApproved == true && i.IsHome == true).ToList());
+            var urunler = _context.Products.Where(i => i.IsApproved == true && i.IsHome == true)
+                .Select(i => new ProductModel()
+                {
+                    Id = i.Id,
+                    Name = i.Name.Length > 50 ? i.Name.Substring(0, 47) + ".." : i.Name,
+                    Description = i.Description.Length > 50 ? i.Description.Substring(0, 47) + ".." : i.Description,
+                    Price = i.Price,
+                    Stock = i.Stock,
+                    Image = i.Image ?? "1.jpg",
+                    CategoryId = i.CategoryId
+                }).ToList();
+            return View(urunler);
         }
 
         public ActionResult Details(int Id)
@@ -24,7 +35,19 @@ namespace Abuyukkilic.Mvc.WebUI.Controllers
 
         public ActionResult List()
         {
-            return View(_context.Products.Where(i => i.IsApproved == true).ToList());
+            var urunler = _context.Products.Where(i => i.IsApproved == true)
+                .Select(i => new ProductModel()
+                {
+                    Id = i.Id,
+                    Name = i.Name.Length > 50 ? i.Name.Substring(0,47)+".." : i.Name ,
+                    Description = i.Description.Length > 50 ? i.Description.Substring(0, 47) + ".." : i.Description,
+                    Price = i.Price,
+                    Stock = i.Stock,
+                    Image = i.Image ?? "1.jpg",
+                    CategoryId = i.CategoryId
+                }).ToList();
+            return View(urunler);
+
         }
     }
 }
