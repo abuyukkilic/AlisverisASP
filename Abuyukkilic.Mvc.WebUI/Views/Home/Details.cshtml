@@ -20,13 +20,13 @@
                 <div class="col-md-12">
                     @if (Model.IsApproved)
                     {
-                        <span class="badge badge-primary">Stokta</span>
+                        <span class="badge badge-success">Stokta</span>
                     }
                     else
                     {
                         <span class="badge badge-danger">Stokta Yok</span>
                     }
-                    <span class="badge badge-primary">Stokta</span>
+                   
                     <span class="product-number">#@Model.Id</span>
                 </div>
             </div>
@@ -63,11 +63,14 @@
 
             <div class="row mt-2">
                 <div class="col-md-12">
-
-                    <div class="btn btn-success">
-                        <i class="fas fa-cart-plus"></i>
-                        Sepete ekle
-                    </div>
+                    @using (Html.BeginForm("AddToCart", "Cart"))
+                    {
+                        @Html.HiddenFor(i => i.Id)
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-cart-plus"></i>
+                            Sepete ekle
+                        </button>
+                    }
 
                 </div>
             </div>

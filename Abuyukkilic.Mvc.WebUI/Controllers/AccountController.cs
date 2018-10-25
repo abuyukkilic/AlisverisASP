@@ -38,11 +38,13 @@ namespace Abuyukkilic.Mvc.WebUI.Controllers
             if (ModelState.IsValid)
             {
                 //Kayıt işlemleri
-                ApplicationUser user = new ApplicationUser();
-                user.Name = model.Name;
-                user.Surname = model.Surname;
-                user.Email = model.Email;
-                user.UserName = model.Username;
+                ApplicationUser user = new ApplicationUser
+                {
+                    Name = model.Name,
+                    Surname = model.Surname,
+                    Email = model.Email,
+                    UserName = model.Username
+                };
 
                 IdentityResult result = UserManager.Create(user, model.Password);
                 if (result.Succeeded)
@@ -86,8 +88,10 @@ namespace Abuyukkilic.Mvc.WebUI.Controllers
 
                     var authManager = HttpContext.GetOwinContext().Authentication;
                     var identityClaims = UserManager.CreateIdentity(user, "ApplicationCookie");
-                    var authProporties = new AuthenticationProperties();
-                    authProporties.IsPersistent = model.RememberMe;
+                    var authProporties = new AuthenticationProperties
+                    {
+                        IsPersistent = model.RememberMe
+                    };
                     authManager.SignIn(authProporties, identityClaims);
 
                     if (!String.IsNullOrEmpty(ReturnUrl))
