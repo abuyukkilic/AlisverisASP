@@ -4,12 +4,28 @@
     ViewBag.Title = "Checkout";
 }
 <style>
-    .field-validation-error { color: #f00;}
-    .field-validation-valid { display: none;}
-    .input-validation-error { border: 1px solid #f00; background-color: #fed;}
-    .validation-summary-errors { font-weight: bold; color: #f00;}
-    .validation-summary-valid { display: none;}
-    </style>
+    .field-validation-error {
+        color: #f00;
+    }
+
+    .field-validation-valid {
+        display: none;
+    }
+
+    .input-validation-error {
+        border: 1px solid #f00;
+        background-color: #fed;
+    }
+
+    .validation-summary-errors {
+        font-weight: bold;
+        color: #f00;
+    }
+
+    .validation-summary-valid {
+        display: none;
+    }
+</style>
 
 <div class="container">
     <div class="row">
@@ -26,8 +42,8 @@
                         @Html.DisplayNameFor(model => model.UserName)
                     </label>
                     <div class="col-sm-10">
-
-                        @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+                        <span class="badge badge-danger">@User.Identity.Name</span>
+                        @*@Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })*@
                     </div>
                 </div>
 
@@ -36,8 +52,8 @@
                         @Html.DisplayNameFor(model => model.AdresBasligi)
                     </label>
                     <div class="col-sm-10">
-                        <span class="badge badge-danger">@User.Identity.Name</span>
-                        @*@Html.TextBoxFor(x => x.AdresBasligi, new { @class = "form-control" })*@
+
+                        @Html.TextBoxFor(x => x.AdresBasligi, new { @class = "form-control" })
                     </div>
                 </div>
 

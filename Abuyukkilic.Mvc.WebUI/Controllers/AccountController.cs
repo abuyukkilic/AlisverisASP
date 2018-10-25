@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Abuyukkilic.Mvc.WebUI.Entity;
 using Abuyukkilic.Mvc.WebUI.Identity;
 using Abuyukkilic.Mvc.WebUI.Models;
 using Microsoft.AspNet.Identity;
@@ -16,6 +17,52 @@ namespace Abuyukkilic.Mvc.WebUI.Controllers
         private UserManager<ApplicationUser> UserManager;
 
         private RoleManager<ApplicationRole> RoleManager;
+
+        private DataContext db = new DataContext();
+        [Authorize]
+        public ActionResult Index()
+        {
+            var username = User.Identity.Name;
+            var orders = db.Order.Where(i => i.UserName == username).Select(i => new UserOrderModel()
+            {
+                Id = i.Id,
+                OrderNumber = i.OrderNumber,
+                OrderState = i.OrderState,
+                OrderDate = i.OrderDate,
+                Total = i.Total
+            }).OrderByDescending(i => i.OrderDate).ToList();
+            return View(orders);
+        }
+        [Authorize]
+        public ActionResult Details(int id)
+        {
+            var entity = db.Order.Where(i => i.Id == id)
+                .Select(i => new OrderDetailsModel()
+                {
+                    OrderId = i.Id,
+                    OrderNumber = i.OrderNumber,
+                    Total = i.Total,
+                    OrderDate = i.OrderDate,
+                    OrderState = i.OrderState,
+                    Adres = i.Adres,
+                    AdresBasligi = i.AdresBasligi,
+                    Sehir = i.Sehir,
+                    Semt = i.Semt,
+                    PostaKodu = i.PostaKodu,
+                    Mahalle = i.Mahalle,
+                    Orderlines = i.Orderlines.Select(a => new OrderLineModel()
+                    {
+                        ProductId = a.ProductId,
+                        ProductName = a.Product.Name.Length > 50 ? a.Product.Name.Substring(0, 47) + ".." : a.Product.Name,
+                        Image = a.Product.Image,
+                        Price = a.Price,
+                        Quantity = a.Quantity
+                    }).ToList()
+
+                }).FirstOrDefault();
+
+            return View(entity);
+        }
 
         public AccountController()
         {
@@ -75,7 +122,7 @@ namespace Abuyukkilic.Mvc.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(Login model,string ReturnUrl)
+        public ActionResult Login(Login model, string ReturnUrl)
         {
             if (ModelState.IsValid)
             {

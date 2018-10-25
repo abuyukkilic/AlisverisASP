@@ -115,8 +115,9 @@ namespace Abuyukkilic.Mvc.WebUI.Controllers
 
             order.Total = cart.Total();
             order.OrderDate = DateTime.Now;
-
-            order.UserName = entity.UserName;
+            order.OrderState = EnumOrderState.Waiting;
+            order.UserName = User.Identity.Name;
+            
             order.AdresBasligi = entity.AdresBasligi;
             order.Adres = entity.Adres;
             order.Sehir = entity.Sehir;
