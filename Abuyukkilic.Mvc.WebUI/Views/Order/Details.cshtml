@@ -1,29 +1,41 @@
-﻿@using Abuyukkilic.Mvc.WebUI.Entity
+﻿@using System.ServiceModel.Channels
+@using Abuyukkilic.Mvc.WebUI.Entity
 @model Abuyukkilic.Mvc.WebUI.Models.OrderDetailsModel
-
 @{
-    ViewBag.Title = "title";
-
+    ViewBag.Title = "Details";
 }
 
 <div class="container">
     <div class="row ">
         <div class="col-md-12">
-            <h2>Sipariş Detay Bilgileri</h2>
+            <h2>Sipariş Detay Bilgileri - Admin</h2>
             <hr />
-
+            @if (TempData["message"] != null)
+            {
+                <div class="alert alert-success">
+                    @TempData["message"]
+                </div>
+            }
             <dl class="row">
-
+               
+                <dt class="col-sm-3">Username</dt>
+                <dd class="col-sm-9">@Model.Username</dd>
                 <dt class="col-sm-3">Order State</dt>
                 <dd class="col-sm-9">
-                    @if (Model.OrderState == EnumOrderState.Waiting)
+
+                    @using (Html.BeginForm("UpdateOrderState", "Order", FormMethod.Post))
                     {
-                        <span class="badge badge-danger"> @Model.OrderState</span>
+                        @Html.HiddenFor(i => i.OrderId)
+                        <dl class="row">
+                            <dt class="col-sm-8">
+                                @Html.EnumDropDownListFor(i => i.OrderState, "Select Order State", new { @class = "form-control" })
+                            </dt>
+                            <dd class="col-sm-4">
+                                <button type="submit" class="btn btn-primary">Güncelle</button>
+                            </dd>
+                        </dl>
                     }
-                    else if (Model.OrderState == EnumOrderState.Completed)
-                    {
-                        <span class="badge badge-success"> @Model.OrderState</span>
-                    }
+
 
                 </dd>
 
@@ -91,3 +103,4 @@
         </div>
     </div>
 </div>
+
