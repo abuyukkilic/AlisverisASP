@@ -39,6 +39,7 @@ namespace Abuyukkilic.Mvc.WebUI.Controllers
                 string password = ConfigurationManager.AppSettings["password"];
                 string fromname = ConfigurationManager.AppSettings["fromname"];
                 string to = ConfigurationManager.AppSettings["to"];
+                string copyto = ConfigurationManager.AppSettings["epostacopy"];
 
                 var client = new SmtpClient();
                 client.Host = server;
@@ -50,6 +51,14 @@ namespace Abuyukkilic.Mvc.WebUI.Controllers
                 var email = new MailMessage();
                 email.From = new MailAddress(from,fromname);
                 email.To.Add(to);
+                if (!string.IsNullOrEmpty(copyto))
+                {
+                    string [] mails = copyto.Split(',');
+                    foreach (var item in mails)
+                    {
+                        email.Bcc.Add(item);
+                    }                    
+                }
 
                 email.Subject = contact.Subject;
                 email.IsBodyHtml = true;
