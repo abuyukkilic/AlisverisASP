@@ -65,7 +65,7 @@ namespace Abuyukkilic.Mvc.WebUI.Controllers
                 email.Body = $"ad soyad: {contact.AdSoyad} \n" +
                              $"konu: {contact.Subject}\n" +
                              $"gönderim zamanı: {contact.SendingTime} \n" +
-                             $"mail içeriği: {contact.Subject}";
+                             $"mail içeriği : {contact.Subject}";
                 try
                 {
                     client.Send(email);
