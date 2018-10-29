@@ -16,6 +16,7 @@ namespace Abuyukkilic.Mvc.WebUI.Entity
         public DbSet<Category> Categories { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<OrderLine> OrderLines { get; set; }
+        public DbSet<Contact> Contact { get; set; }
 
     }
 }

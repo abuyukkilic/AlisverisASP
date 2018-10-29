@@ -61,5 +61,8 @@ namespace Abuyukkilic.Mvc.WebUI.Controllers
         {
             return PartialView(_context.Categories.ToList());
         }
+
+       
+
     }
 }
