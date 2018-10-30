@@ -126,6 +126,7 @@
   <ItemGroup>
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
+    <Content Include="bower.json" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -155,6 +156,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup1.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Entity\Contact.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
@@ -217,6 +219,8 @@
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Order\Details.cshtml" />
     <Content Include="Views\Contact\Iletisim.cshtml" />
+    <Content Include="Views\FileUpload\Index.cshtml" />
+    <Content Include="Views\FileUpload\AjaxFileUpload.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -226,6 +230,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

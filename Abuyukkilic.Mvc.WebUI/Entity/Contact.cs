@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -9,6 +10,7 @@ namespace Abuyukkilic.Mvc.WebUI.Entity
     {
         public int Id { get; set; }
         public string EmailAddress { get; set; }
+        [Required]
         public string AdSoyad { get; set; }
         public string Subject { get; set; }
         public string EmailContent { get; set; }
